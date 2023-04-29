@@ -20,9 +20,45 @@
       crossorigin="anonymous"
     ></script>
 
-    <title>Spartapedia</title>
+    <title>人生最高の映画</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      let myemail = "aaa@gmail.com";
+
+      let result = myemail.split("@");
+
+      result[0];
+      result[1];
+      console.log(result);
+
+      let result2 = result[1].split(".");
+
+      result2[0];
+      result2[1];
+      console.log(result2);
+
+      $(document).ready(function () {
+        fetch("http://spartacodingclub.shop/sparta_api/weather/tokyo")
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            $("#temp").empty();
+            let temp = data["temp"];
+            $("#temp").text(temp);
+          });
+      });
+    </script>
 
     <style>
+      * {
+        font-family: "Gowun Dodum", sans-serif;
+      }
+
       .mytitle {
         width: 100%;
         height: 250px;
@@ -61,21 +97,34 @@
         border: 2px solid white;
       }
 
-      .movie-form {
-        width: 400px;
-        margin: 10px auto;
-        box-shadow: 0px 0px 3px 0px gray;
-        padding: 20px;
+      .mycomment {
+        color: gray;
       }
 
-      .movie-form-btn {
+      .mycards {
+        margin: 20px auto 0px auto;
+        width: 95%;
+        max-width: 1200px;
+      }
+
+      .mypost {
+        width: 95%;
+        max-width: 500px;
+        margin: 20px auto 0px auto;
+        padding: 20px;
+        box-shadow: 0px 0px 3px 0px gray;
+      }
+
+      .mybtns {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
+
+        margin-top: 20px;
       }
 
-      .btn-primary{
+      .mybtns > button {
         margin-right: 10px;
       }
     </style>
@@ -83,111 +132,110 @@
 
   <body>
     <div class="mytitle">
-      <h1>My favorite movies</h1>
-      <button>Save a new movie</button>
+      <h1>人生最高の映画</h1>
+      <div>今の気温 : <span id="temp">20</span>度</div>
+      <button
+        onclick="hey()
+      "
+      >
+        映画記録
+      </button>
     </div>
-    <div class="movie-form">
-      <form>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">MOVIE URL</label>
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-          />
-        </div>
-        <div class="input-group mb-3">
-          <label class="input-group-text" for="inputGroupSelect01">Stars</label>
-          <select class="form-select" id="inputGroupSelect01">
-            <option selected>---select a rating --</option>
-            <option value="1">⭐</option>
-            <option value="2">⭐⭐</option>
-            <option value="3">⭐⭐⭐</option>
-            <option value="4">⭐⭐⭐⭐</option>
-            <option value="5">⭐⭐⭐⭐⭐</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">COMMENT</label>
-          <textarea
-            class="form-control comment-area"
-            id="exampleFormControlTextarea1"
-            rows="3"
-          ></textarea>
-        </div>
-        <div class="movie-form-btn">
-          <div>
-            <button type="submit" class="btn btn-primary">Save</button>
-          </div>
-          <div>
-            <button type="submit" class="btn btn-secondary">cancel</button>
-          </div>
-        </div>
-      </form>
+    <div class="mypost">
+      <div class="form-floating mb-3">
+        <input
+          type="email"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+        />
+        <label for="floatingInput">映画URL</label>
+      </div>
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">採点</label>
+        <select class="form-select" id="inputGroupSelect01">
+          <option selected>-- 選択 --</option>
+          <option value="1">⭐</option>
+          <option value="2">⭐⭐</option>
+          <option value="3">⭐⭐⭐</option>
+          <option value="4">⭐⭐⭐⭐</option>
+          <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
+      </div>
+      <div class="form-floating">
+        <textarea
+          class="form-control"
+          placeholder="Leave a comment here"
+          id="floatingTextarea2"
+          style="height: 100px"
+        ></textarea>
+        <label for="floatingTextarea2">コメント</label>
+      </div>
+      <div class="mybtns">
+        <button type="button" class="btn btn-dark">記録</button>
+        <button type="button" class="btn btn-outline-dark">閉じる</button>
+      </div>
     </div>
-    <div class="row row-cols-1 row-cols-md-4 g-4">
-      <div class="col">
-        <div class="card h-100">
-          <img
-            src="https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"
-            class="card-img-top"
-            alt="..."
-          />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              This is a longer card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
-            </p>
-            <span>⭐⭐⭐</span>
+    <div class="mycards">
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col">
+          <div class="card h-100">
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">ここに映画のタイトルが入ります。</h5>
+              <p class="card-text">ここに映画の説明が入ります。</p>
+              <p>⭐⭐⭐</p>
+              <p class="mycomment">ここにコメントが入ります。</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="card h-100">
-          <img
-            src="https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"
-            class="card-img-top"
-            alt="..."
-          />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a short card.</p>
+        <div class="col">
+          <div class="card h-100">
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">ここに映画のタイトルが入ります。</h5>
+              <p class="card-text">ここに映画の説明が入ります。</p>
+              <p>⭐⭐⭐</p>
+              <p class="mycomment">ここにコメントが入ります。</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="card h-100">
-          <img
-            src="https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"
-            class="card-img-top"
-            alt="..."
-          />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              This is a longer card with supporting text below as a natural
-              lead-in to additional content.
-            </p>
+        <div class="col">
+          <div class="card h-100">
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">ここに映画のタイトルが入ります。</h5>
+              <p class="card-text">ここに映画の説明が入ります。</p>
+              <p>⭐⭐⭐</p>
+              <p class="mycomment">ここにコメントが入ります。</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="card h-100">
-          <img
-            src="https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"
-            class="card-img-top"
-            alt="..."
-          />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              This is a longer card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
-            </p>
+        <div class="col">
+          <div class="card h-100">
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">ここに映画のタイトルが入ります。</h5>
+              <p class="card-text">ここに映画の説明が入ります。</p>
+              <p>⭐⭐⭐</p>
+              <p class="mycomment">ここにコメントが入ります。</p>
+            </div>
           </div>
         </div>
       </div>
